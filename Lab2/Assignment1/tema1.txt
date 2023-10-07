@@ -1,0 +1,46 @@
+Study documentation (3 links) from the lab2_0.txt file.
+
+1. Create topic with 1 broker as --bootstrap-server. 
+The brokers' ports are taken from the docker-compose_kafka.yml
+The topic should have 3 partitions and replication-factor 1
+The name of the topic is events1. 
+    
+	/usr/bin/kafka-topics --create --bootstrap-server kafka:9092 localhost:9092 --partitions 3 replication-factor 1 --topic events1
+
+Create a second topic having 1 broker as --bootstrap-server. 
+The brokers' ports are taken from the docker-compose_kafka.yml
+The topic should have 4 partitions and replication-factor 1
+The name of the topic is events2. 	
+
+	/usr/bin/kafka-topics --create --bootstrap-server kafka:9092 localhost:9092 --partitions 4 replication-factor 1  --topic events2	
+
+2. List all topics 
+
+	/usr/bin/kafka-topics --list --bootstrap-server kafka:9092
+
+3. Describe topic event1
+
+	/usr/bin/kafka-topics --bootstrap-server kafka:9092 --describe --topic events1
+
+4. Send data. Create a Producer and send data to events1 topic.
+
+	/usr/bin/kafka-console-producer --bootstrap-server kafka:9092 --topic events1
+
+5. Read the data. Create a Consumer and read data from events1 topic.  
+Create a second Consumer and read data from events1 topic, using --from-beginning option.
+Explain the difference between the 2 consumers. 
+
+	docker exec -ti kafka /usr/bin/kafka-console-consumer --bootstrap-server kafka:9092 --topic events1
+
+	docker exec -ti kafka /usr/bin/kafka-console-consumer --bootstrap-server kafka:9092 --topic events1 --from-beginning
+
+	The difference between the two commands is that the first consumer will start consuming messages from
+	"events1" topic, but will not read messages that were produced before the consumer was created, instead
+	it will consume only from the current offset. The second command starts consuming messages from the
+	beginning of the "events1" topic and it will read all messages in that topic, including those that were 
+	produced before the consumer was created.
+
+
+6. Delete topic events2
+
+	/usr/bin/kafka-topics --bootstrap-server kafka:9092 --topic events2 --delete
