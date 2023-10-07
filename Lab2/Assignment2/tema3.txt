@@ -14,7 +14,7 @@ Purge the topic. Set retention to a small value
 
 After sometime when you run this command the messages will not be shown
 		
-	Yes, indeed!
+	/usr/bin/kafka-console-producer --bootstrap-server kafka:19092,kafka2:19093,kafka3:19094 --topic events2
 
 3. Set retention to normal value like retention.ms=604800000
  Check the topic. Create a producer and send some messages.
