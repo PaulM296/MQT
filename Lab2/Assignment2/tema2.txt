@@ -3,28 +3,22 @@ The brokers' ports are taken from the docker-compose_kafka.yml
 The topic should have 3 partitions and replication-factor 3
 The name of the topic is events1. 
 
-    	/usr/bin/kafka-topics --create --bootstrap-server kafka:9092,kafka2:9093,kafka3:9094 --partitions 3 replication-factor 3 --topic events1
+    	/usr/bin/kafka-topics --create --bootstrap-server kafka:19092,kafka2:19093,kafka3:19094 --partitions 3 replication-factor 3 --topic events1
 
 Create a second topic having 3 brokers as --bootstrap-server. 
 The brokers' ports are taken from the docker-compose_kafka.yml
 The topic should have 4 partitions and replication-factor 2
 The name of the topic is events2. 	
 
-	/usr/bin/kafka-topics --create --bootstrap-server kafka:9092,kafka2:9093,kafka3:9094 --partitions 4 replication-factor 2 --topic events2
+	/usr/bin/kafka-topics --create --bootstrap-server kafka:19092,kafka2:19093,kafka3:19094 --partitions 4 replication-factor 2 --topic events2
 
 2. List all topics 
 
-	/usr/bin/kafka-topics --list --bootstrap-server kafka:9092,kafka2:9093,kafka3:9094	
+	/usr/bin/kafka-topics --list --bootstrap-server kafka:19092,kafka2:19093,kafka3:19094	
 
 3. Send data. Create a Producer and send data to events2 topic, using key and ',' as separator.
 	
 	/usr/bin/kafka-console-producer --bootstrap-server kafka:19092,kafka2:19093,kafka3:19094 --topic events2 --property parse.key=true --property key.separator=','
-
-3. Read the data. Create a Consumer and read data from events2 topic.  
-No data will be shown because we do not have --from-beginning property
-	3. Send data. Create a Producer and send data to events2 topic, using key and ',' as separator.
-	
-	/usr/bin/kafka-console-consumer --bootstrap-server kafka:19092,kafka2:19093,kafka3:19094 --topic events2 --property parse.key=true --property key.separator=','
 
 3. Read the data. Create a Consumer and read data from events2 topic.  
 No data will be shown because we do not have --from-beginning property
