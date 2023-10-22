@@ -1,0 +1,9 @@
+Lab4: Java Consumer
+Simple Java Consumer. Poll messages and write them to console. 
+Produce messages from console and also from Producer API. 
+Consumer group. Launch multiple consumers. Check partition assignment. Stop 1 or more consumers. Check partition assignment. Restart consumers. Check partition assignment.   
+Configure Consumer parameters: earliest vs latest, default offset, committing offset, rebalanced techniques
+
+Java API structures: Implement Kafka Consumer in Java. Consumer group. 
+ConsumerConfig, Properties and paremeters
+Consumer.poll

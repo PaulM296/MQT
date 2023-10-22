@@ -1,0 +1,13 @@
+Lab2: Kakfa UI tools 
+What offers an UI tool.
+AKHQ
+KafkaUI 
+Confluent control center
+Offset Explorer (former Kafka Tool)
+Admin 
+Conductor 
+Kakfa line command tool: Kaf
+
+Present yml file. 
+sau tema de laborator - mini proiect 
+fiecare student(1-2) prezinta un tool. 
