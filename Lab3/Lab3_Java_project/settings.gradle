@@ -1,2 +1,4 @@
 rootProject.name = 'untitled'
+include 'src:main:avro'
+findProject(':src:main:avro')?.name = 'avro'
 
