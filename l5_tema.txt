@@ -1,0 +1,46 @@
+Lab5: Kafka APIs: Producer-Consumer
+1. Use SimpleExampleProducer.java class. Send an json file on topic events2. 
+The modified file might be names JsonProducer.java. 
+
+2. Use SimpleExampleProducer.java class or JsonProducer.java. 
+Send a Java object as payload. 
+The Java is the class 
+public class Company {
+    private String company;
+    int tradeNumber;
+    String registeredName;}
+	
+The file should be named CompanyProducer.java. 
+In acest caz la dependencies se va adauga:    implementation 'io.confluent:kafka-json-serializer:7.5.1'
+iar la 
+repositories {
+    maven {
+        url "https://packages.confluent.io/maven"
+    }
+}
+
+3. Create a Producer that uses an avro schema for Company class.
+In main folder of the Producer project create avro folder.
+Copy file AvroCompany.avsc into avro folder. 
+NOTE:  If you create the avro folder in any other folder, but NOT in main, the sources will NOT be generated. 
+In build.gradle file:
+Add   id 'com.github.davidmc24.gradle.plugin.avro' version '1.9.1'   at plugins section
+Add   implementation group: 'io.confluent', name: 'kafka-avro-serializer', version: '7.5.1'   at dependencies section
+Gradle tab --> Producer --> Tasks -->  source generation --> generateAvroJava
+right click -> play "Run Producer"
+The AvroCompany.java will be generated into "build" folder.
+build --> generated-main-avro-java folder
+
+verify schema-registry server:
+http://localhost:8081/   --> the port coresponds with the value from docker-compose.yml
+http://localhost:8081/subjects
+http://localhost:8081/schemas/ids/1 
+
+4. Create a Consumer that uses an avro schema for Company class. 
+
+Questions: 
+1.Why is needed the class empty constructor? 
+The class empty constructor is needed because Avro requires it in order for the deserialization to work properly. Without it, Avro would not be able to instantiate objects properly and it would lead to deserialization errors.
+
+2.Why are the Getters needed?
+The getters are needed in order to control the data access during serialization and deserialization. They maintain encapsulation and ensure that only necessary data is serialized, thus preventing access to the internal state of the object.
