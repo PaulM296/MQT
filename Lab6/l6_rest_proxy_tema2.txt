@@ -1,0 +1,69 @@
+Open Windows PowerShell. 
+1. Get cluster Id
+
+curl http://localhost:8082/v3/clusters
+In Windows PowerShell, curl is an alis for Invoke-WebRequest command. It is not the curl command. 
+
+Invoke-WebRequest -Uri http://localhost:8082/v3/clusters
+
+Invoke-WebRequest -Uri http://localhost:8082/v3/clusters | Select-Object -Expand Content
+ 
+--> get cluster_id from the josn result. 
+ 
+2. Set cluster id
+ $cluster="TZ7rbN7FQbCOYoBBiK-oDg"
+ $cluster="5U-MvEgXQXK_tfJCQs8jyg"
+ $cluster="xZKr78BBRyCqx_5NpTlxow"
+ 
+2. Create topic
+
+$body = @{ "topic_name" ="curl_topic" }
+$headers = @{  'Content-Type'='application/json' }
+ 
+Invoke-WebRequest -Method 'Post' -Uri "http://localhost:8082/v3/clusters/$cluster/topics" -Body ($body|ConvertTo-Json) -Headers $headers -ContentType "application/json"  | Select-Object -Expand Content
+ 
+
+ 
+ curl.exe -X POST -H "Content-Type: application/json" --data '{ \"topic_name\": \"my-topic2\" }' "http://localhost:8082/v3/clusters/$cluster/topics"
+ curl.exe -X POST -H "Content-Type: application/json" --data '{ \"topic_name\": \"topic2\" }' "http://localhost:8082/v3/clusters/$cluster/topics"
+ curl.exe "http://localhost:8082/v3/clusters/$cluster/topics" 
+ 
+ Invoke-WebRequest -Uri http://localhost:8082/v3/clusters/$cluster/topics | Select-Object -Expand Content
+ 
+3. Describe topic
+
+curl  "http://localhost:8082/v3/clusters/$cluster/topics"
+curl  "http://localhost:8082/v3/clusters/$cluster/topics/topicFromPostman"
+
+
+curl http://localhost:8082/v3/clusters/TU1DP4VgQGqazrkhYz0Xog/topics/topicFromPostman
+curl http://localhost:8082/v3/clusters/xZKr78BBRyCqx_5NpTlxow/topics/curl_topic
+curl http://localhost:8082/v3/clusters/$cluster/topics/curl_topic
+
+
+4. List all topics 
+
+curl http://localhost:8082/v3/clusters/$cluster/topics
+Invoke-WebRequest -Uri "http://localhost:8082/v3/clusters/$cluster/topics"
+Invoke-WebRequest "http://localhost:8082/v3/clusters/$cluster/topics"
+
+
+5. Send data 
+curl.exe -X POST -H "Content-Type: application/json" --data '{ \"key\": { \"type\": \"JSON\", \"data\": \"key1\" }, \"value\": { \"type\": \"JSON\", \"data\": \"value2 seara\" } }' "http://localhost:8082/v3/clusters/$cluster/topics/curl_topic/records"
+
+6. Create a consumer group
+
+curl.exe -X POST -H "Content-Type: application/vnd.kafka.v2+json"  --data '{\"name\": \"FirstConsumer\", \"format\": \"json\", \"auto.offset.reset\": \"earliest\"}'   http://localhost:8082/consumers/HappyGroup
+
+7. Create subscription  
+-- aici se poate adauga si o lista de topic-uri : {\"topics\": [\"topicFromPostman\", \"topic2\"]}
+curl.exe -X POST -H "Content-Type: application/vnd.kafka.v2+json"  --data '{\"topics\": [\"curl_topic\"]}' http://localhost:8082/consumers/HappyGroup2/instances/FirstConsumer/subscription
+
+8. Get messages
+curl.exe -X GET  -H "Content-Type: application/vnd.kafka.json.v2+json" -H "Accept: application/vnd.kafka.json.v2+json"  "http://localhost:8082/consumers/HappyGroup/instances/FirstConsumer/records" 
+curl.exe -X GET  -H "Content-Type: application/vnd.kafka.json.v2+json" -H "Accept: application/vnd.kafka.json.v2+json"  "http://localhost:8082/consumers/GrupConsumatori/instances/PrimulConsumer/records" 
+
+9. Delete consumer group
+
+curl.exe -X DELETE  -H "Content-Type: application/vnd.kafka.v2+json"  http://localhost:8082/consumers/GrupConsumatori/instances/PrimulConsumer
+
