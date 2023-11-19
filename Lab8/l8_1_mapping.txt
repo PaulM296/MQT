@@ -1,0 +1,28 @@
+1. Create two topics:
+from command line
+ docker exec -ti kafka /usr/bin/kafka-topics --create --bootstrap-server localhost:9092 --topic TextLinesTopic --partitions 10
+ 
+ docker exec -ti kafka /usr/bin/kafka-topics --create --bootstrap-server localhost:9092 --topic UppercasedTextLinesTopic --partitions 10
+  
+or from the Kafka terminal (Docker Desktop): 
+ /usr/bin/kafka-topics --create --bootstrap-server kafka:19092 --topic TextLinesTopic --partitions 10
+ 
+ /usr/bin/kafka-topics --create --bootstrap-server kafka:19092 --topic UppercasedTextLinesTopic --partitions 10
+2. Go to Maven panel (top-right in IntelliJ)
+ kafka-streams-examples --> Plugins --> avro --> avro:schema --> right click --> Run Maven Build
+ 
+3. Run streams.MapFunctionLambdaKStreamConsumer
+
+  The application must be running.
+  
+4. Run streams.MapFunctionLambdaProducer or
+
+  Produce some values with the console producer.
+  
+  docker exec -ti kafka /usr/bin/kafka-console-producer --bootstrap-server kafka:19092 --topic TextLinesTopic
+  
+5. Check the topic UppercasedTextLinesTopic
+
+ docker exec -ti kafka /usr/bin/kafka-console-consumer --bootstrap-server kafka:19092 --topic UppercasedTextLinesTopic --from-beginning
+
+Explain what is happening. 

@@ -1,0 +1,21 @@
+1. Create two topics:
+from command line
+docker exec -ti kafka /usr/bin/kafka-topics --create --bootstrap-server localhost:9092 --topic Purchases --partitions 10
+ 
+docker exec -ti kafka /usr/bin/kafka-topics --create --bootstrap-server localhost:9092 --topic PurchaseStatistics --partitions 10
+
+
+or from the Kafka terminal (Docker Desktop): 
+	/usr/bin/kafka-topics --create --bootstrap-server kafka:19092 --topic Purchases --partitions 10
+ 
+	/usr/bin/kafka-topics --create --bootstrap-server kafka:19092 --topic PurchaseStatistics --partitions 10
+ 
+ 
+2. Run streams.PurchaseStatisticsKStreamConsumer
+
+  The application must be running
+  
+3. Run streams.PurchaseStatisticsProduder
+
+
+4. Check the topic PurchaseStatistics

@@ -1,0 +1,15 @@
+1. Take confluentinc-kafka-connect-jdbc-10.4.1.zip from Laboratory-Hands-On\L7_7_nov_2023
+and extract it in your working directory Module7.
+
+2. cd Module7 folder
+
+3. docker-compose up
+In case of succes, the containers are creted into Docker Desktop and in the Module7 folder 2 directories are created:
+db and kafka-source-connector. 
+
+4. Proceed the steps from files: 
+	lab1_postgres_source.txt
+	lab2_postgres_source.txt
+	lab3_postgres_sink.txt
+	lab4_postgres_sink.txt
+

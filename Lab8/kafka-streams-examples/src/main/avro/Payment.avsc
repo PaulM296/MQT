@@ -1,0 +1,15 @@
+{
+  "namespace": "models",
+  "type": "record",
+  "name": "Payment",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "purchaseId",
+      "type": "long"
+    }
+  ]
+}

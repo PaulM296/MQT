@@ -1,0 +1,7 @@
+Java git project for writing your own connectos.
+
+https://github.com/build-on-aws/building-apache-kafka-connectors
+
+git clone https://github.com/build-on-aws/building-apache-kafka-connectors.git
+
+in folder-ul Module7

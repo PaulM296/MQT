@@ -1,0 +1,17 @@
+1. In Control Center create JDBC sink connector. The configuration is in file postgres-sink-connector-2.json
+
+http://localhost:9021
+
+2. In schema registry container produce avro messages
+MERGE:
+docker exec -ti schema-registry /usr/bin/kafka-avro-console-producer --bootstrap-server kafka:19092 --topic customers-with-key --property schema.registry.url=http://schema-registry:8081 --property value.schema="{\"type\":\"record\",\"name\":\"customer\",\"fields\":[{\"name\":\"id\",\"type\":\"int\"},{\"name\":\"name\",\"type\":\"string\"}]}"
+
+-- fara \"  --> NU merge
+docker exec -ti schema-registry /usr/bin/kafka-avro-console-producer --bootstrap-server kafka:19092 --topic customers-with-key --property schema.registry.url=http://schema-registry:8081 --property value.schema="{"type":"record","name":"customer","fields":[{"name":"id","type":"int"},{"name":"name","type":"string"}]}"
+
+
+{"id": 1, "name": "Janett Falow"}
+{"id": 2, "name": "John Cache"}
+{"id": 3, "name": "Black Beauty"}
+
+3. Check the table in http://localhost:8080

@@ -1,0 +1,7 @@
+{ "name": "local-console-source", 
+  "config": 
+    {"connector.class": "org.example.connectors.FileStreamSourceConnector", 
+     "tasks.max": 1,
+     "topic": "connect-test"
+    }
+}    

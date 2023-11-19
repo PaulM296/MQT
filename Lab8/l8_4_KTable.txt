@@ -1,0 +1,5 @@
+Based on the examples from MQT courses: MQT_course6_KStreams.pdf and MQT_course7_KStreams2.pdf, implement:
+B. Operations on KTable. 
+
+1. Stateless operatoins: Peek, Filter, MapValue, Map. 
+2. Create examples that implements stream-tables joins: innerJoins, leftOuterJoins.

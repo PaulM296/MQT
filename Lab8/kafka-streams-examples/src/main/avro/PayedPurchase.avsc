@@ -1,0 +1,19 @@
+{
+  "namespace": "models",
+  "type": "record",
+  "name": "PayedPurchase",
+  "fields": [
+    {
+      "name": "paymentId",
+      "type": "long"
+    },
+    {
+      "name": "purchaseId",
+      "type": "long"
+    },
+    {
+      "name": "product",
+      "type": "string"
+    }
+  ]
+}

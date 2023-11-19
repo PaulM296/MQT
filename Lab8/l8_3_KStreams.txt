@@ -1,0 +1,9 @@
+Based on the examples from MQT courses: MQT_course6_KStreams.pdf and MQT_course7_KStreams2.pdf, implement:
+A. Operations on Kafka Streams. 
+
+1. Stateless operatoins: Peek, Filter, MapValue, Map. 
+2. Stateful operations: GroupBy, Reduce, Count.
+3. Implement different types of windows: Hopping, Tumbling, Seesion and Sliding. 
+4. Implement the windows with and without grace period. Explain the difference. 
+5. Create examples that use aggregation. 
+6. Create examples with stream-stream joins: innerJoins, outerjoins, left joins.  
