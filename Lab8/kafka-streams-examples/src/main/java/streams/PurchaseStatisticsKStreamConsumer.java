@@ -135,6 +135,29 @@ public class PurchaseStatisticsKStreamConsumer {
 				.peek((key, value) -> LOG.info("Tumbling Window with Grace Period - Key: {}, Value: {}", key, value))
 				.to("TumblingWindowWithGracePeriodPurchaseStatistics", Produced.with(WindowedSerdes.timeWindowedSerdeFrom(String.class), Serdes.Long()));
 
+		// 5
+
+		purchases.groupByKey()
+				.aggregate(() -> 0.0,
+						(key, purchase,aggregate) -> aggregate + purchase.getAmount(),
+						Materialized.with(Serdes.String(), Serdes.Double()))
+				.toStream()
+				.to("SumOfAmountsByProduct", Produced.with(Serdes.String(), Serdes.Double()));
+
+		// 6.1
+
+		KStream<String, String> stream1 = builder.stream("stream1");
+		KStream<String, String> stream2 = builder.stream("stream2");
+
+		KTable<String, String> table2 = stream2.toTable();
+
+		KStream<String, String> leftJoinStream = stream1.leftJoin(
+				table2,
+				(value1, value2) -> (value1 != null ? value1 : "null") + ", " + (value2 != null ? value2 : "null"),
+				Joined.with(Serdes.String(), Serdes.String(), Serdes.String())
+		);
+
+		leftJoinStream.to("LeftJoinOutput");
 
 		final KafkaStreams streams = new KafkaStreams(builder.build(), streamsConfiguration);
 		streams.cleanUp();
