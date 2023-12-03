@@ -1,0 +1,25 @@
+1. Considering the readings topic is already created
+	readings --> partitions 6
+
+2. Produce some events into readings  topic
+INSERT INTO readings (sensor, val, location) VALUES ('sensor-1', 45, 'wheel');
+INSERT INTO readings (sensor, val, location) VALUES ('sensor-2', 41, 'motor');
+INSERT INTO readings (sensor, val, location) VALUES ('sensor-1', 42, 'wheel');
+INSERT INTO readings (sensor, val, location) VALUES ('sensor-3', 42, 'muffler');
+INSERT INTO readings (sensor, val, location) VALUES ('sensor-3', 48, 'muffler');
+
+3. Create KTable:
+CREATE TABLE avg_readings AS 
+	SELECT sensor, AVG(val) as avg 
+	FROM readings
+	GROUP BY sensor
+	EMIT CHANGES;
+
+CREATE TABLE part_avg AS 
+	SELECT location, AVG(val) as avg 
+	FROM readings
+	GROUP BY location
+	EMIT CHANGES;
+
+
+https://www.youtube.com/watch?v=-C7bzLQ_pI0

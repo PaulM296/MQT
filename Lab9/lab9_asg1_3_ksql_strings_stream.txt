@@ -1,0 +1,32 @@
+1. Create two topics:
+
+topic item in left part of menu, above ksqlDB. 
+Add topic --> ConfluentTextLinesTopic --> partitions 10
+Add topic --> UppercasedTextLinesTopic --partitions 10
+
+2. Produce some low-case values into ConfluentTextLinesTopic
+topic item in left part of menu, above ksqlDB. 
+choose --> ConfluentTextLinesTopic --> Messages tab --> "+ Produce a new message to this topic"
+"alpha"  --> Produce
+"beta"  --> Produce
+
+3. Run KSQL 
+ksqlDB item in left part of menu, under Topics. 
+ksqlDB_cluster_0 --> Editor
+(or the name of cluster that you have created)
+
+4. Run the commands inside KSQL
+
+SET 'auto.offset.reset'='earliest';
+
+CREATE STREAM ConfluentTextLinesStream (line VARCHAR) WITH (KAFKA_TOPIC='ConfluentTextLinesTopic', VALUE_FORMAT='KAFKA'); 
+
+SELECT * FROM ConfluentTextLinesStream EMIT CHANGES;
+
+SELECT Ucase(line) FROM ConfluentTextLinesStream EMIT CHANGES;
+
+CREATE STREAM UppercasedTextLinesStream WITH (KAFKA_TOPIC='UppercasedTextLinesTopic',  VALUE_FORMAT='KAFKA') AS SELECT Ucase(line) FROM ConfluentTextLinesStream;
+
+5. Check UppercasedTextLinesTopic topic;
+
+SELECT * FROM UppercasedTextLinesStream EMIT CHANGES; 

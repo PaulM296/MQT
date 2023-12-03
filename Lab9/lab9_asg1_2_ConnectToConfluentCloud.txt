@@ -1,0 +1,8 @@
+1. cnfl.io/confluent-cloud
+promo code:  KSQLDB101
+https://www.youtube.com/watch?v=vcrLNuOBBMU  - minute 2.30 
+I used the cs e-mail:  laurentia.timar@cs.upt.ro
+
+Don't forget the password. You will need it later. 
+
+2. Follow the tutorial steps. 

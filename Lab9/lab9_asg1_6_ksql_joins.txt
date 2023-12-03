@@ -1,0 +1,45 @@
+1. Considering the already created topics in the previous exercises you can try to create some stream-stream joins and stream-table joins.
+
+ https://www.youtube.com/watch?v=8NQhfhSAmqo
+
+CREATE STREAM readingsTutorial (
+  sensor VARCHAR KEY,
+  reading DOUBLE,
+  area VARCHAR
+  ) WITH (
+  kafka_topic='readingsTutorial',
+  value_format='json',
+  partitions=3
+    );
+
+CREATE STREAM enriched_readings AS
+  SELECT r.reading, 
+         r.area,
+         b.brand_name
+  FROM readings
+  INNER JOIN brands b
+  ON b.sensor = r.sensor
+  EMIT CHANGES;
+
+INSERT INTO brands (sensor, brand_name) VALUES ('sensor-1', 'Cassin Inc');
+INSERT INTO brands (sensor, brand_name) VALUES ('sensor-2', 'Carroll Ltd');
+INSERT INTO brands (sensor, brand_name) VALUES ('sensor-3', 'Hirthe Inc');
+INSERT INTO brands (sensor, brand_name) VALUES ('sensor-4', 'WALKER LLC');
+
+SELECT * FROM brands EMIT CHANGES;
+
+INSERT INTO readingsTutorial (sensor, reading, area) VALUES ('sensor-1',45,'wheel');
+INSERT INTO readireadingsTutorialngs (sensor, reading, area) VALUES ('sensor-2',41,'motor');
+INSERT INTO readingsTutorial (sensor, reading, area) VALUES ('sensor-1',92,'wheel');
+INSERT INTO readingsTutorial (sensor, reading, area) VALUES ('sensor-2',13,'engine');
+
+CREATE STREAM enriched_readings AS
+  SELECT r.reading, 
+         r.area,
+         b.brand_name
+  FROM readings
+  INNER JOIN brands b
+  ON b.sensor = r.sensor
+  EMIT CHANGES;
+
+ https://www.youtube.com/watch?v=-Ys3FzQdq_o

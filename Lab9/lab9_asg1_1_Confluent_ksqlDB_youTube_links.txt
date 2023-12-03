@@ -1,0 +1,24 @@
+1. kSQL -architecture 
+https://www.youtube.com/watch?v=vcrLNuOBBMU&list=PLa7VYi0yPIH0SG2lvtS2Aoa12F22jKYYJ&index=3 
+- aici arata cum ma conecta la un cluster Confluent. 
+
+2. Stateless operations in KsqlDB
+https://www.youtube.com/watch?v=XksUFRlJ1ZQ&list=PLa7VYi0yPIH0SG2lvtS2Aoa12F22jKYYJ&index=4 
+
+3. Inside ksqlDB: Stateless Operations in ksqlDB – Mapping, Filtering, and More
+https://www.youtube.com/watch?v=XksUFRlJ1ZQ
+
+4. Inside ksqlDB: Stateful Operations in ksqlDB – Aggregations, Materialized Views, and Pull Queries
+https://www.youtube.com/watch?v=-C7bzLQ_pI0
+
+5. Inside ksqlDB: How Streaming Joins Work in ksqlDB
+https://www.youtube.com/watch?v=8NQhfhSAmqo
+
+6. Inside ksqlDB: Joining an Event Stream with a Table on Confluent Cloud (Hands On)
+https://www.youtube.com/watch?v=-Ys3FzQdq_o
+
+7. Inside ksqlDB: Elastic Scaling and Fault Tolerance in ksqlDB
+https://www.youtube.com/watch?v=fIZsLWA_DH4
+
+8. Inside ksqlDB: High Availability in ksqlDB
+https://www.youtube.com/watch?v=S3oaJrPViBw

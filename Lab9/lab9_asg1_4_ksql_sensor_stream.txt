@@ -1,0 +1,41 @@
+1. Create topic:
+	readings --> partitions 6
+
+2. create stream for topic readings
+CREATE STREAM readings  (
+  sensor VARCHAR KEY, 
+  val DOUBLE, 
+  location VARCHAR) WITH (
+    kafka_topic='readings', 
+    partitions=6, 
+    value_format='JSON');
+
+3. Produce some events into readings  topic
+INSERT INTO readings (sensor, val, location) VALUES ('sensor-1', 45, 'wheel');
+INSERT INTO readings (sensor, val, location) VALUES ('sensor-2', 41, 'motor');
+INSERT INTO readings (sensor, val, location) VALUES ('sensor-1', 42, 'wheel');
+INSERT INTO readings (sensor, val, location) VALUES ('sensor-3', 42, 'muffler');
+INSERT INTO readings (sensor, val, location) VALUES ('sensor-3', 48, 'muffler');
+
+4. Run some queries
+CREATE STREAM clean AS SELECT sensor, val, UCASE(location) as location FROM readings EMIT CHANGES;
+
+SELECT sensor, val, location FROM readings WHERE sensor='sensor-1'  EMIT CHANGES;
+
+CREATE STREAM high_readings AS SELECT sensor, val, location FROM clean where val > 42 EMIT CHANGES;
+
+5. Produce some events into readings  topic
+INSERT INTO readings (sensor, val, location) VALUES ('sensor-3', 36, 'motor');
+..
+
+6.  Run some queries
+CREATE STREAM high_pri AS SELECT sensor, val, UCASE(location) as location 
+FROM readings where val > 42 EMIT CHANGES;
+
+CREATE STREAM by_location AS SELECT * FROM high_pri 
+PARTITION BY location EMIT CHANGES;
+
+CREATE STREAM by_val AS SELECT * FROM high_pri 
+PARTITION BY val EMIT CHANGES;
+
+https://www.youtube.com/watch?v=XksUFRlJ1ZQ&list=PLa7VYi0yPIH0SG2lvtS2Aoa12F22jKYYJ&index=3
